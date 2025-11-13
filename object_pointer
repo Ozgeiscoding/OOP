@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+class myclass {
+private:
+    int a;
+public:
+    myclass(int x);  // constructor
+    int get();
+};
+
+myclass::myclass(int x) {
+    a = x; 
+}
+int myclass::get() {
+    return a; 
+}
+
+int main() {
+    myclass ob_1(125);      // nesne oluşturma
+    myclass* p;             // nesne pointer'ı
+    p = &ob_1;              // adres atama
+
+    cout << ob_1.get() << endl;    // nesne ile: 125
+    cout << p->get() << endl;      // pointer ile: 125
+    return 0;
+}
