@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+class myclass {
+private:
+    int a;
+public:
+    myclass(int x);  // parametreli constructor
+    void show();
+};
+
+myclass::myclass(int x) {
+    cout << "Constructor" << endl;
+    a = x;
+}
+
+void myclass::show() {
+    cout << a << endl;
+}
+
+int main() {
+    myclass object_1(5);  // parametre ile oluşturma
+    object_1.show();      // 5
+    return 0;
+}
