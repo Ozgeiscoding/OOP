@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+union {
+    int i;
+    char ch[4];
+};  // isimsiz union
+
+int main() {
+    i = 10;
+    cout << "i: " << i << " ch: " << ch << endl;
+    
+    ch[0] = 'x';
+    cout << "i: " << i << " ch: " << ch << endl;
+    return 0;
+}
