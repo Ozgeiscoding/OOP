@@ -1,0 +1,68 @@
+//error code
+//Her iki nesnenin p'si aynı bellek adresini gösterir
+//Destructor çağrıldığında aynı bellek iki kez serbest bırakılır
+//s2'nin orijinal belleği hiç serbest bırakılmaz
+
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
+using namespace std;
+
+class strtype {
+private:
+    char* p;
+    int len;
+public:
+    double y;
+    void set(char* ptr, double x);
+    strtype(char* ptr);  // constructor
+    ~strtype();          // destructor
+    void show();
+};
+
+strtype::strtype(char* ptr) {
+    len = strlen(ptr);
+    p = (char*)malloc(len + 1);
+    if (!p) {
+        cout << "Allocation error" << endl;
+        exit(1);
+    }
+    strcpy(p, ptr);
+}
+
+strtype::~strtype() {
+    cout << "Freeing p. y = " << y << endl;
+    free(p);
+}
+
+void strtype::show() {
+    cout << p << " Length: " << len << " y = " << y << endl;
+}
+
+void strtype::set(char* ptr, double x) {
+    y = x;
+    if (strlen(ptr) >= len) {
+        len = strlen(ptr) + 1;
+        free(p);
+        p = (char*)malloc(len);
+        if (!p) {
+            cout << "Allocation error" << endl;
+            exit(1);
+        }
+    }
+    len = strlen(ptr) + 1;
+    strcpy(p, ptr);
+}
+
+int main() {
+    strtype s1("Test1"), s2("Test2");
+    s1.set("This is a test", 1.0);
+    s2.set("I like C++", 2.0);
+    s1.show();
+    s2.show();
+
+    s2 = s1;  // HATA! - shallow copy
+    s1.show();
+    s2.show();
+    return 0;
+}
