@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+class myclass {
+private:
+    int n, d;
+public:
+    myclass(int i, int j) { n = i; d = j; }
+    friend int isfactor(myclass ob1);  // friend bildirimi
+};
+
+int isfactor(myclass ob1) {  // friend fonksiyon tanımı
+    if (ob1.n % ob1.d)
+        return 1;  // bölünemiyor
+    else
+        return 0;  // bölünebiliyor
+}
+
+int main() {
+    myclass ob_1(10, 2), ob_2(10, 3);
+
+    if (isfactor(ob_1))
+        cout << "2 is not a factor of 10" << endl;
+    else
+        cout << "2 is a factor of 10" << endl;
+
+    if (isfactor(ob_2))
+        cout << "3 is not a factor of 10" << endl;
+    else
+        cout << "3 is a factor of 10" << endl;
+
+    return 0;
+}
+
+// Çıktı:
+// 2 is a factor of 10
+// 3 is not a factor of 10
